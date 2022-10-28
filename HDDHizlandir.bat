@@ -16,8 +16,10 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Se
 fsutil behavior set encryptpagingfile 0 & REM Sanal RAM özelliğini kapatır. 
 set folder="%temp%" 
 cd /d %folder%
-for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s /q || del "%%i" /s /q)
+for /F "delims=" %%i in ('dir /b') do (rmdir "%%i" /s /q || del "%%i" /s /q) & REM Geçici dosyaları temizler.
 powershell -ExecutionPolicy ByPass -Command "$ScriptFromGitHub=Invoke-WebRequest "https://raw.githubusercontent.com/GokhanTurk/SlowHDDFixWin10/main/DisableChromeReport.ps1" -UseBasicParsing;Invoke-Expression $($ScriptFromGitHub.Content)"
+REM powershell scripti chrome report toolunu bloklamak içindir.
+powershell -ExecutionPolicy ByPass -Command Write-Host -fore Red DEĞİŞİKLİKLERİN ETKİLİ OLMASI İÇİN BİLGİSAYARI YENİDEN BAŞLATMANIZ GEREKİYOR!
 pause
 exit
 :EXIT
